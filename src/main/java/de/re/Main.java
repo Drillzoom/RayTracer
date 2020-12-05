@@ -1,5 +1,8 @@
 package de.re;
 
+import de.re.common.Color;
+import de.re.utility.Colors;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,11 +26,8 @@ public class Main {
                     float g = (float) j / (height-1);
                     float b = 0.25f;
 
-                    int ir = (int) (255.99f * r);
-                    int ig = (int) (255.99f * g);
-                    int ib = (int) (255.99f * b);
-
-                    bw.write(ir + " " + ig + " " + ib + "\n");
+                    Color pixelColor = new Color(r, g, b);
+                    Colors.writeColor(bw, pixelColor);
                 }
             }
         } catch (IOException e) {

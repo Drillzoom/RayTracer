@@ -17,6 +17,7 @@ public class Ray {
     }
 
     public Point3 at(float t) {
-        return (Point3) origin.add(direction.mul(t));
+        Point3 orig = new Point3(origin);
+        return (Point3) orig.add(direction.mul(t));
     }
 }

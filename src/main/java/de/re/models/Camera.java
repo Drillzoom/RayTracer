@@ -1,4 +1,4 @@
-package de.re.model;
+package de.re.models;
 
 import de.re.common.Point3;
 import de.re.common.Vec3;

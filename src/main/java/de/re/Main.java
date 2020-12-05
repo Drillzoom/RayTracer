@@ -2,10 +2,10 @@ package de.re;
 
 import de.re.common.Color;
 import de.re.common.Point3;
-import de.re.model.Camera;
-import de.re.model.HittableList;
-import de.re.model.Ray;
-import de.re.model.Sphere;
+import de.re.models.Camera;
+import de.re.geometry.HittableList;
+import de.re.models.Ray;
+import de.re.geometry.Sphere;
 import de.re.utility.Colors;
 import de.re.utility.Maths;
 

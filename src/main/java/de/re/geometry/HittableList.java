@@ -1,4 +1,6 @@
-package de.re.model;
+package de.re.geometry;
+
+import de.re.models.Ray;
 
 import java.util.ArrayList;
 import java.util.List;

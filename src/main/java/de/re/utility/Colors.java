@@ -2,9 +2,9 @@ package de.re.utility;
 
 import de.re.common.Color;
 import de.re.common.Vec3;
-import de.re.model.HitRecord;
-import de.re.model.Hittable;
-import de.re.model.Ray;
+import de.re.geometry.HitRecord;
+import de.re.geometry.Hittable;
+import de.re.models.Ray;
 
 import java.io.IOException;
 import java.io.Writer;

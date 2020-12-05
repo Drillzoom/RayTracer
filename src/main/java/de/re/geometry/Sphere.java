@@ -1,7 +1,8 @@
-package de.re.model;
+package de.re.geometry;
 
 import de.re.common.Point3;
 import de.re.common.Vec3;
+import de.re.models.Ray;
 import de.re.utility.Vectors;
 
 public class Sphere implements Hittable {

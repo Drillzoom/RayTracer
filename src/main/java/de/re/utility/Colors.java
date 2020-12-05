@@ -37,15 +37,15 @@ public final class Colors {
 
     private static float hitSphere(Point3 center, float radius, Ray r) {
         Vec3 oc = Vectors.sub(r.origin, center);
-        float a = Vectors.dot(r.direction, r.direction);
-        float b = 2.0f * Vectors.dot(oc, r.direction);
-        float c = Vectors.dot(oc, oc) - radius*radius;
-        float discriminant = b*b - 4*a*c;
+        float a = r.direction.lengthSquared();
+        float halfB = Vectors.dot(oc, r.direction);
+        float c = oc.lengthSquared() - radius*radius;
+        float discriminant = halfB*halfB - a*c;
 
         if (discriminant < 0) {
             return -1.0f;
         } else {
-            return (float) (-b - Math.sqrt(discriminant)) / (2.0f * a);
+            return (float) (-halfB - Math.sqrt(discriminant)) / a;
         }
     }
 }

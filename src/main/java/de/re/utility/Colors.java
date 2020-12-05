@@ -14,19 +14,29 @@ public final class Colors {
 
     }
 
-    public static void writeColor(Writer out, Color pixelColor) throws IOException {
-        int r = (int) (255.999f * pixelColor.r());
-        int g = (int) (255.999f * pixelColor.g());
-        int b = (int) (255.999f * pixelColor.b());
+    public static void writeColor(Writer out, Color pixelColor, int samplesPerPixel) throws IOException {
+        float r = pixelColor.r();
+        float g = pixelColor.g();
+        float b = pixelColor.b();
 
-        out.write(r + " " + g + " " + b + "\n");
+        // Divide the color by the number of samples
+        float scale = 1.0f / samplesPerPixel;
+        r *= scale;
+        g *= scale;
+        b *= scale;
+
+        int ir = (int) (256 * Maths.clamp(r, 0.0f, 0.999f));
+        int ig = (int) (256 * Maths.clamp(g, 0.0f, 0.999f));
+        int ib = (int) (256 * Maths.clamp(b, 0.0f, 0.999f));
+
+        // Write translated [0, 255] value of each color component
+        out.write(ir + " " + ig + " " + ib + "\n");
     }
 
     public static Color rayColor(Ray r, Hittable world) {
         HitRecord rec = new HitRecord();
         if (world.hit(r, 0, (float) Maths.INFINITY, rec)) {
-            Vec3 n = rec.normal;
-            return (Color) new Color(n.x()+1, n.y()+1, n.z()+1).mul(0.5f);
+            return new Color(Vectors.add(rec.normal, new Color(1.0f, 1.0f, 1.0f)).mul(0.5f));
         }
 
         Vec3 unitDirection = Vectors.unitVector(r.direction);

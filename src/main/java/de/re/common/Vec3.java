@@ -6,6 +6,10 @@ public class Vec3 {
     public Vec3() {
     }
 
+    public Vec3(Vec3 v) {
+        e = new float[]{v.e[0], v.e[1], v.e[2]};
+    }
+
     public Vec3(float e0, float e1, float e2) {
         e = new float[]{e0, e1, e2};
     }
@@ -30,6 +34,13 @@ public class Vec3 {
         e[0] += v.e[0];
         e[1] += v.e[1];
         e[2] += v.e[2];
+        return this;
+    }
+
+    public Vec3 sub(Vec3 v) {
+        e[0] -= v.e[0];
+        e[1] -= v.e[1];
+        e[2] -= v.e[2];
         return this;
     }
 

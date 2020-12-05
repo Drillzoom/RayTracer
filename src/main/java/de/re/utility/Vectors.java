@@ -28,12 +28,12 @@ public final class Vectors {
 
     // TODO: 05.12.2020 Implementation correct?
     public static Vec3 mul(Vec3 v, float t) {
-        return v.mul(t);
+        return new Vec3(v).mul(t);
     }
 
     // TODO: 05.12.2020 Implementation correct?
     public static Vec3 div(Vec3 v, float t) {
-        return v.mul(1/t);
+        return new Vec3(v).mul(1/t);
     }
 
     public static float dot(Vec3 u, Vec3 v) {
@@ -52,7 +52,7 @@ public final class Vectors {
 
     // TODO: 05.12.2020 Implementation correct?
     public static Vec3 unitVector(Vec3 v) {
-        return v.div(v.length());
+        return new Vec3(v).div(v.length());
     }
 
     // TODO: 05.12.2020 This class or Vec3 class?

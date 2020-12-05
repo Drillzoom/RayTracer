@@ -1,6 +1,13 @@
 package de.re.common;
 
 public class Color extends Vec3 {
+    public Color() {
+    }
+
+    public Color(Color c) {
+        super(c);
+    }
+
     public Color(float r, float g, float b) {
         super(r, g, b);
     }

@@ -56,7 +56,7 @@ public final class Vectors {
     }
 
     // TODO: 05.12.2020 This class or Vec3 class?
-    public Vec3 negate(Vec3 v) {
+    public static Vec3 negate(Vec3 v) {
         return new Vec3(-v.e[0], -v.e[1], -v.e[2]);
     }
 }

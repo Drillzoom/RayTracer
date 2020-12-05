@@ -3,7 +3,9 @@ package de.re;
 import de.re.common.Color;
 import de.re.common.Point3;
 import de.re.common.Vec3;
+import de.re.model.HittableList;
 import de.re.model.Ray;
+import de.re.model.Sphere;
 import de.re.utility.Colors;
 import de.re.utility.Vectors;
 
@@ -20,6 +22,13 @@ public class Main {
         final float aspectRatio = 16.0f / 9.0f;
         final int imageWidth = 400;
         final int imageHeight = (int) (imageWidth / aspectRatio);
+
+        // World
+        HittableList world = new HittableList();
+        Sphere sphere = new Sphere(new Point3(0.0f, 0.0f, -1.0f), 0.5f);
+        Sphere sphere2 = new Sphere(new Point3(0.0f, -100.5f, -1.0f), 100.0f);
+        world.add(sphere);
+        world.add(sphere2);
 
         // Camera
         float viewportHeight = 2.0f;
@@ -48,7 +57,7 @@ public class Main {
                     Vec3 add2 = Vectors.add(add1, Vectors.mul(vertical, v));
                     Ray r = new Ray(origin, Vectors.sub(add2, origin));
 
-                    Color pixelColor = Colors.rayColor(r);
+                    Color pixelColor = Colors.rayColor(r, world);
                     Colors.writeColor(bw, pixelColor);
                 }
             }

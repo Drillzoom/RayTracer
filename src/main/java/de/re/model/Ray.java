@@ -16,6 +16,7 @@ public class Ray {
         this.direction = direction;
     }
 
+    // TODO: 05.12.2020 Maybe do not mutate direction?
     public Point3 at(float t) {
         Point3 orig = new Point3(origin);
         return (Point3) orig.add(direction.mul(t));

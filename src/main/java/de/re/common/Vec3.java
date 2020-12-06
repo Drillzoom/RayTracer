@@ -6,6 +6,10 @@ public class Vec3 {
     public Vec3() {
     }
 
+    public Vec3(float e) {
+        this.e = new float[]{e, e, e};
+    }
+
     public Vec3(Vec3 v) {
         e = new float[]{v.e[0], v.e[1], v.e[2]};
     }

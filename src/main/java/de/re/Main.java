@@ -23,6 +23,7 @@ public class Main {
         final int imageWidth = 400;
         final int imageHeight = (int) (imageWidth / aspectRatio);
         final int samplesPerPixel = 100;
+        final int maxDepth = 50;
 
         // World
         HittableList world = new HittableList();
@@ -41,13 +42,13 @@ public class Main {
             for (int j = imageHeight-1; j >= 0; j--) { // int j = 0; j < imageHeight; j++
                 System.out.println("\rScanlines remaining: " + j);
                 for (int i = 0; i < imageWidth; i++) {
-                    Color pixelColor = new Color(0.0f, 0.0f, 0.0f);
+                    Color pixelColor = new Color();
                     for (int s = 0; s < samplesPerPixel; s++) {
                         float u = (i + Maths.randomFloat()) / (imageWidth - 1);
                         float v = (j + Maths.randomFloat()) / (imageHeight - 1);
 
                         Ray r = camera.getRay(u, v);
-                        pixelColor.add(Colors.rayColor(r, world));
+                        pixelColor.add(Colors.rayColor(r, world, maxDepth));
                     }
                     Colors.writeColor(bw, pixelColor, samplesPerPixel);
                 }

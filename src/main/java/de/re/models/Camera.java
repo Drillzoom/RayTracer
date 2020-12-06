@@ -19,7 +19,7 @@ public class Camera {
         float viewportWidth = aspectRatio * viewportHeight;
         float focalLength = 1.0f;
 
-        origin = new Point3(0.0f, 0.0f, 0.0f);
+        origin = new Point3();
         horizontal = new Vec3(viewportWidth, 0.0f, 0.0f);
         vertical = new Vec3(0.0f, viewportHeight, 0.0f);
 

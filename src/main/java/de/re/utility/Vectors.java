@@ -59,4 +59,26 @@ public final class Vectors {
     public static Vec3 negate(Vec3 v) {
         return new Vec3(-v.e[0], -v.e[1], -v.e[2]);
     }
+
+    public static Vec3 random() {
+        return new Vec3(Maths.randomFloat(), Maths.randomFloat(), Maths.randomFloat());
+    }
+
+    public static Vec3 random(float min, float max) {
+        return new Vec3(Maths.randomFloat(min, max), Maths.randomFloat(min, max), Maths.randomFloat(min, max));
+    }
+
+    public static Vec3 randomInUnitSphere() {
+        while (true) {
+            Vec3 p = random(-1.0f, 1.0f);
+            if (p.lengthSquared() >= 1) {
+                continue;
+            }
+            return p;
+        }
+    }
+
+    public static Vec3 randomUnitVector() {
+        return unitVector(randomInUnitSphere());
+    }
 }

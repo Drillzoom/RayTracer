@@ -4,6 +4,10 @@ public class Color extends Vec3 {
     public Color() {
     }
 
+    public Color(float c) {
+        super(c);
+    }
+
     public Color(Vec3 v) {
         super(v);
     }

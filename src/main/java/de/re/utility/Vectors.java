@@ -81,4 +81,13 @@ public final class Vectors {
     public static Vec3 randomUnitVector() {
         return unitVector(randomInUnitSphere());
     }
+
+    public static Vec3 randomInHemisphere(Vec3 normal) {
+        Vec3 inUnitSphere = randomInUnitSphere();
+        if (dot(inUnitSphere, normal) > 0.0f) { // In the same hemisphere as the normal
+            return inUnitSphere;
+        } else {
+            return negate(inUnitSphere);
+        }
+    }
 }

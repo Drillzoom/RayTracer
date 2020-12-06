@@ -43,7 +43,10 @@ public final class Colors {
         }
 
         if (world.hit(r, 0.001f, (float) Maths.INFINITY, rec)) {
-            Point3 target = new Point3(Vectors.add(Vectors.add(rec.point, rec.normal), Vectors.randomUnitVector()));
+            // Hemispherical scattering
+            Point3 target = new Point3(Vectors.add(rec.point, Vectors.randomInHemisphere(rec.normal)));
+
+            //Point3 target = new Point3(Vectors.add(Vectors.add(rec.point, rec.normal), Vectors.randomUnitVector()));
 
             return (Color) rayColor(new Ray(rec.point, Vectors.sub(target, rec.point)), world, depth-1).mul(0.5f);
         }

@@ -33,8 +33,8 @@ public class Main {
 
         Material materialGround = new Lambertian(new Color(0.8f, 0.8f, 0.0f));
         Material materialCenter = new Lambertian(new Color(0.7f, 0.3f, 0.3f));
-        Material materialLeft = new Metal(new Color(0.8f));
-        Material materialRight = new Metal(new Color(0.8f, 0.6f, 0.2f));
+        Material materialLeft = new Metal(new Color(0.8f), 0.1f);
+        Material materialRight = new Metal(new Color(0.8f, 0.6f, 0.2f), 1.0f);
 
         world.add(new Sphere(new Point3(0.0f, -100.5f, -1.0f), materialGround, 100.0f));
         world.add(new Sphere(new Point3(0.0f, 0.0f, -1.0f), materialCenter, 0.5f));

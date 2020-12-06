@@ -66,4 +66,9 @@ public class Vec3 {
     public float lengthSquared() {
         return e[0]*e[0] + e[1]*e[1] + e[2]*e[2];
     }
+
+    public boolean nearZero() {
+        final float s = 1e-8f;
+        return (Math.abs(e[0]) < s) && (Math.abs(e[1]) < s) && (Math.abs(e[2]) < s);
+    }
 }

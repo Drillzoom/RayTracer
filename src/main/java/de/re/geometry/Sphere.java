@@ -2,16 +2,20 @@ package de.re.geometry;
 
 import de.re.common.Point3;
 import de.re.common.Vec3;
+import de.re.materials.Material;
 import de.re.models.Ray;
 import de.re.utility.Vectors;
 
 public class Sphere implements Hittable {
     public Point3 center;
 
+    public Material material;
+
     public float radius;
 
-    public Sphere(Point3 center, float radius) {
+    public Sphere(Point3 center, Material material, float radius) {
         this.center = center;
+        this.material = material;
         this.radius = radius;
     }
 
@@ -41,6 +45,7 @@ public class Sphere implements Hittable {
         rec.point = r.at(rec.t);
         Vec3 outwardNormal = Vectors.sub(rec.point, center).div(radius);
         rec.setFaceNormal(r, outwardNormal);
+        rec.material = material;
 
         return true;
     }

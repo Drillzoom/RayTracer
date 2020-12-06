@@ -21,4 +21,9 @@ public class Ray {
         Point3 orig = new Point3(origin);
         return (Point3) orig.add(direction.mul(t));
     }
+
+    public void overwrite(Ray r) {
+        this.origin = r.origin;
+        this.direction = r.direction;
+    }
 }

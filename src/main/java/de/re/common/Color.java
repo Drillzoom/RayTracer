@@ -31,4 +31,10 @@ public class Color extends Vec3 {
     public float b() {
         return e[2];
     }
+
+    public void overwrite(Color c) {
+        this.e[0] = c.e[0];
+        this.e[1] = c.e[1];
+        this.e[2] = c.e[2];
+    }
 }

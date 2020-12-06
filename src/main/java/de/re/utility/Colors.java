@@ -43,12 +43,13 @@ public final class Colors {
         }
 
         if (world.hit(r, 0.001f, (float) Maths.INFINITY, rec)) {
-            // Hemispherical scattering
-            Point3 target = new Point3(Vectors.add(rec.point, Vectors.randomInHemisphere(rec.normal)));
+            Ray scattered = new Ray();
+            Color attenuation = new Color();
+            if (rec.material.scatter(r, rec, attenuation, scattered)) {
+                return new Color(Vectors.mul(attenuation, rayColor(scattered, world, depth-1)));
+            }
 
-            //Point3 target = new Point3(Vectors.add(Vectors.add(rec.point, rec.normal), Vectors.randomUnitVector()));
-
-            return (Color) rayColor(new Ray(rec.point, Vectors.sub(target, rec.point)), world, depth-1).mul(0.5f);
+            return new Color();
         }
 
         Vec3 unitDirection = Vectors.unitVector(r.direction);

@@ -90,4 +90,8 @@ public final class Vectors {
             return negate(inUnitSphere);
         }
     }
+
+    public static Vec3 reflect(Vec3 v, Vec3 n) {
+        return new Vec3(sub(v, mul(n, 2.0f * dot(v, n))));
+    }
 }

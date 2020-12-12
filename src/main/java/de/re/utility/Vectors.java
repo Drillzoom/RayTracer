@@ -94,4 +94,11 @@ public final class Vectors {
     public static Vec3 reflect(Vec3 v, Vec3 n) {
         return new Vec3(sub(v, mul(n, 2.0f * dot(v, n))));
     }
+
+    public static Vec3 refract(Vec3 uv, Vec3 n, float refRatio) {
+        float cosTheta = Math.min(dot(negate(uv), n), 1.0f);
+        Vec3 rOutPerp = add(uv, mul(n, cosTheta)).mul(refRatio); // Perpendicular ray
+        Vec3 rOutParallel = n.mul((float) -Math.sqrt(Math.abs(1.0f - rOutPerp.lengthSquared()))); // Parallel ray
+        return add(rOutPerp, rOutParallel);
+    }
 }

@@ -21,6 +21,7 @@ public class Metal implements Material {
         Vec3 reflected = Vectors.reflect(Vectors.unitVector(rIn.direction), rec.normal);
         scattered.overwrite(new Ray(rec.point, reflected.add(Vectors.randomInUnitSphere().mul(fuzz))));
         attenuation.overwrite(albedo);
+
         return Vectors.dot(scattered.direction, rec.normal) > 0;
     }
 }

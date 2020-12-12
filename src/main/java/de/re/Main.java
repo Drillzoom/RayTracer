@@ -2,6 +2,7 @@ package de.re;
 
 import de.re.common.Color;
 import de.re.common.Point3;
+import de.re.materials.Dielectric;
 import de.re.materials.Lambertian;
 import de.re.materials.Material;
 import de.re.materials.Metal;
@@ -32,13 +33,14 @@ public class Main {
         HittableList world = new HittableList();
 
         Material materialGround = new Lambertian(new Color(0.8f, 0.8f, 0.0f));
-        Material materialCenter = new Lambertian(new Color(0.7f, 0.3f, 0.3f));
-        Material materialLeft = new Metal(new Color(0.8f), 0.1f);
-        Material materialRight = new Metal(new Color(0.8f, 0.6f, 0.2f), 1.0f);
+        Material materialCenter = new Lambertian(new Color(0.1f, 0.2f, 0.5f));
+        Material materialLeft = new Dielectric(1.5f);
+        Material materialRight = new Metal(new Color(0.8f, 0.6f, 0.2f), 0.0f);
 
         world.add(new Sphere(new Point3(0.0f, -100.5f, -1.0f), materialGround, 100.0f));
         world.add(new Sphere(new Point3(0.0f, 0.0f, -1.0f), materialCenter, 0.5f));
         world.add(new Sphere(new Point3(-1.0f, 0.0f, -1.0f), materialLeft, 0.5f));
+        world.add(new Sphere(new Point3(-1.0f, 0.0f, -1.0f), materialLeft, -0.4f));
         world.add(new Sphere(new Point3(1.0f, 0.0f, -1.0f), materialRight, 0.5f));
 
         // Camera

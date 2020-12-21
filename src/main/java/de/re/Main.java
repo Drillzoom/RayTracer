@@ -2,6 +2,7 @@ package de.re;
 
 import de.re.common.Color;
 import de.re.common.Point3;
+import de.re.common.Vec3;
 import de.re.materials.Dielectric;
 import de.re.materials.Lambertian;
 import de.re.materials.Material;
@@ -40,11 +41,11 @@ public class Main {
         world.add(new Sphere(new Point3(0.0f, -100.5f, -1.0f), materialGround, 100.0f));
         world.add(new Sphere(new Point3(0.0f, 0.0f, -1.0f), materialCenter, 0.5f));
         world.add(new Sphere(new Point3(-1.0f, 0.0f, -1.0f), materialLeft, 0.5f));
-        world.add(new Sphere(new Point3(-1.0f, 0.0f, -1.0f), materialLeft, -0.4f));
+        world.add(new Sphere(new Point3(-1.0f, 0.0f, -1.0f), materialLeft, -0.45f));
         world.add(new Sphere(new Point3(1.0f, 0.0f, -1.0f), materialRight, 0.5f));
 
         // Camera
-        Camera camera = new Camera();
+        Camera camera = new Camera(new Point3(-2.0f, 2.0f, 1.0f), new Point3(0.0f, 0.0f, -1.0f), new Vec3(0.0f, 1.0f, 0.0f), 90.0f, aspectRatio);
 
         // Render
         try (BufferedWriter bw = Files.newBufferedWriter(imagePath)) {

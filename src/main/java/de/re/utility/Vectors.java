@@ -91,6 +91,16 @@ public final class Vectors {
         }
     }
 
+    public static Vec3 randomInUnitDisk() {
+        while (true) {
+            Vec3 p = new Vec3(Maths.randomFloat(-1.0f, 1.0f), Maths.randomFloat(-1.0f, 1.0f), 0.0f);
+            if (p.lengthSquared() >= 1.0f) {
+                continue;
+            }
+            return p;
+        }
+    }
+
     public static Vec3 reflect(Vec3 v, Vec3 n) {
         return new Vec3(sub(v, mul(n, 2.0f * dot(v, n))));
     }

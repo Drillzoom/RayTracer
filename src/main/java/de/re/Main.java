@@ -13,6 +13,7 @@ import de.re.models.Ray;
 import de.re.geometry.Sphere;
 import de.re.utility.Colors;
 import de.re.utility.Maths;
+import de.re.utility.Vectors;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -45,7 +46,13 @@ public class Main {
         world.add(new Sphere(new Point3(1.0f, 0.0f, -1.0f), materialRight, 0.5f));
 
         // Camera
-        Camera camera = new Camera(new Point3(-2.0f, 2.0f, 1.0f), new Point3(0.0f, 0.0f, -1.0f), new Vec3(0.0f, 1.0f, 0.0f), 90.0f, aspectRatio);
+        Point3 lookFrom = new Point3(3.0f, 3.0f, 2.0f);
+        Point3 lookAt = new Point3(0.0f, 0.0f, -1.0f);
+        Vec3 vUp = new Vec3(0.0f, 1.0f, 0.0f);
+        float distToFocus = Vectors.sub(lookFrom, lookAt).length();
+        float aperture = 2.0f;
+
+        Camera camera = new Camera(lookFrom, lookAt, vUp, 20.0f, aspectRatio, aperture, distToFocus);
 
         // Render
         try (BufferedWriter bw = Files.newBufferedWriter(imagePath)) {

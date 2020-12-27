@@ -25,32 +25,21 @@ public class Main {
     public static void main(String[] args) {
         // Image
         Path imagePath = Paths.get(args[0]);
-        final float aspectRatio = 16.0f / 9.0f;
-        final int imageWidth = 400;
+        final float aspectRatio = 3.0f / 2.0f;
+        final int imageWidth = 1200;
         final int imageHeight = (int) (imageWidth / aspectRatio);
-        final int samplesPerPixel = 100;
+        final int samplesPerPixel = 500;
         final int maxDepth = 50;
 
         // World
-        HittableList world = new HittableList();
-
-        Material materialGround = new Lambertian(new Color(0.8f, 0.8f, 0.0f));
-        Material materialCenter = new Lambertian(new Color(0.1f, 0.2f, 0.5f));
-        Material materialLeft = new Dielectric(1.5f);
-        Material materialRight = new Metal(new Color(0.8f, 0.6f, 0.2f), 0.0f);
-
-        world.add(new Sphere(new Point3(0.0f, -100.5f, -1.0f), materialGround, 100.0f));
-        world.add(new Sphere(new Point3(0.0f, 0.0f, -1.0f), materialCenter, 0.5f));
-        world.add(new Sphere(new Point3(-1.0f, 0.0f, -1.0f), materialLeft, 0.5f));
-        world.add(new Sphere(new Point3(-1.0f, 0.0f, -1.0f), materialLeft, -0.45f));
-        world.add(new Sphere(new Point3(1.0f, 0.0f, -1.0f), materialRight, 0.5f));
+        HittableList world = randomScene();
 
         // Camera
-        Point3 lookFrom = new Point3(3.0f, 3.0f, 2.0f);
-        Point3 lookAt = new Point3(0.0f, 0.0f, -1.0f);
+        Point3 lookFrom = new Point3(13.0f, 2.0f, 3.0f);
+        Point3 lookAt = new Point3();
         Vec3 vUp = new Vec3(0.0f, 1.0f, 0.0f);
-        float distToFocus = Vectors.sub(lookFrom, lookAt).length();
-        float aperture = 2.0f;
+        float distToFocus = 10.0f;
+        float aperture = 0.1f;
 
         Camera camera = new Camera(lookFrom, lookAt, vUp, 20.0f, aspectRatio, aperture, distToFocus);
 
@@ -78,5 +67,51 @@ public class Main {
         }
 
         System.out.println("\nDone.\n" + imagePath.toAbsolutePath() + "\n");
+    }
+
+    private static HittableList randomScene() {
+        HittableList world = new HittableList();
+
+        Material groundMaterial = new Lambertian(new Color(0.5f));
+        world.add(new Sphere(new Point3(0.0f, -1000.0f, 0.0f), groundMaterial, 1000.0f));
+
+        for (int a = -11; a < 11; a++) {
+            for (int b = -11; b < 11; b++){
+                float chooseMaterial = Maths.randomFloat();
+                Point3 center = new Point3(a + 0.9f*Maths.randomFloat(), 0.2f, b + 0.9f*Maths.randomFloat());
+
+                if (Vectors.sub(center, new Point3(4.0f, 0.2f, 0.0f)).length() > 0.9f) {
+                    Material sphereMaterial;
+
+                    if (chooseMaterial < 0.8f) {
+                        // Diffuse
+                        Color albedo = new Color(Vectors.mul(Vectors.random(), Vectors.random()));
+                        sphereMaterial = new Lambertian(albedo);
+                        world.add(new Sphere(center, sphereMaterial, 0.2f));
+                    } else if (chooseMaterial < 0.95f) {
+                        // Metal
+                        Color albedo = new Color(Vectors.random(0.5f, 1.0f));
+                        float fuzz = Maths.randomFloat(0.0f, 0.5f);
+                        sphereMaterial = new Metal(albedo, fuzz);
+                        world.add(new Sphere(center, sphereMaterial, 0.2f));
+                    } else {
+                        // Glass
+                        sphereMaterial = new Dielectric(1.5f);
+                        world.add(new Sphere(center, sphereMaterial, 0.2f));
+                    }
+                }
+            }
+        }
+
+        Material material1 = new Dielectric(1.5f);
+        world.add(new Sphere(new Point3(0.0f, 1.0f, 0.0f), material1, 1.0f));
+
+        Material material2 = new Lambertian(new Color(0.4f, 0.2f, 0.1f));
+        world.add(new Sphere(new Point3(-4.0f, 1.0f, 0.0f), material2, 1.0f));
+
+        Material material3 = new Metal(new Color(0.7f, 0.6f, 0.5f), 0.0f);
+        world.add(new Sphere(new Point3(4.0f, 1.0f, 0.0f), material3, 1.0f));
+
+        return world;
     }
 }

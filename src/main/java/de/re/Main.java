@@ -41,7 +41,7 @@ public class Main {
         float distToFocus = 10.0f;
         float aperture = 0.1f;
 
-        Camera camera = new Camera(lookFrom, lookAt, vUp, 20.0f, aspectRatio);
+        Camera camera = new Camera(lookFrom, lookAt, vUp, 20.0f, aspectRatio, aperture, distToFocus);
 
         // Render
         try (BufferedWriter bw = Files.newBufferedWriter(imagePath)) {
